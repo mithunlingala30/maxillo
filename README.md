@@ -1,36 +1,36 @@
-<div align="center">
+# 🏥 MaxilloAI
 
-  <h1>🏥 MaxilloAI</h1>
-  <h3><i>AI-Powered Maxillofacial Surgery & Soft-Tissue Outcome Predictor</i></h3>
+### *AI-Powered Maxillofacial Surgery & Soft-Tissue Outcome Predictor*
 
-  <p><b>Transforming pre-operative surgical planning into precision post-surgical reality through Multimodal Gemini AI</b></p>
+**Transforming pre-operative surgical planning into precision post-surgical reality through Multimodal Gemini AI.**
 
-  <p>
-    <a href="#-motivation--problem-statement">Motivation</a> •
-    <a href="#-key-features">Key Features</a> •
-    <a href="#-architecture--data-flow">Architecture</a> •
-    <a href="#-tech-stack--ecosystem">Tech Stack</a> •
-    <a href="#-quickstart-guide">Quickstart</a> •
-    <a href="#-database-schema">Data Schema</a> •
-    <a href="#-clinical--medical-disclaimer">Disclaimer</a>
-  </p>
+---
 
-  <p>
-    <img src="https://img.shields.io/badge/Flutter-3.24%2B-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter" />
-    <img src="https://img.shields.io/badge/Dart-3.3%2B-0175C2?style=for-the-badge&logo=dart&logoColor=white" alt="Dart" />
-    <img src="https://img.shields.io/badge/Gemini_AI-1.5_Pro-8E75B2?style=for-the-badge&logo=googlecloud&logoColor=white" alt="Gemini AI" />
-    <img src="https://img.shields.io/badge/Firebase-Auth_%26_Firestore-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase" />
-    <img src="https://img.shields.io/badge/Backend-Render.com-46E3B7?style=for-the-badge&logo=render&logoColor=black" alt="Render" />
-    <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="License" />
-  </p>
+![Flutter](https://img.shields.io/badge/Flutter-3.24%2B-02569B?style=for-the-badge&logo=flutter&logoColor=white)
+![Dart](https://img.shields.io/badge/Dart-3.3%2B-0175C2?style=for-the-badge&logo=dart&logoColor=white)
+![Gemini AI](https://img.shields.io/badge/Gemini_AI-1.5_Pro-8E75B2?style=for-the-badge&logo=googlecloud&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase-Auth_%26_Firestore-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
+![Render](https://img.shields.io/badge/Backend-Render.com-46E3B7?style=for-the-badge&logo=render&logoColor=black)
+![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)
 
-</div>
+---
+
+## 📌 Table of Contents
+
+- [Motivation & Problem Statement](#-motivation--problem-statement)
+- [Key Features](#-key-features)
+- [Architecture & Data Flow](#-architecture--data-flow)
+- [Tech Stack](#-tech-stack--ecosystem)
+- [Project Structure](#-project-structure)
+- [Quickstart Guide](#-quickstart-guide)
+- [Database Schema](#-database-schema)
+- [Clinical Disclaimer](#-clinical--medical-disclaimer)
 
 ---
 
 ## 🎯 Motivation & Problem Statement
 
-Maxillofacial reconstruction (combining bone grafting, microvascular free flaps, and facial symmetry restoration) presents immense structural and visual complexity. 
+Maxillofacial reconstruction (combining bone grafting, microvascular free flaps, and facial symmetry restoration) presents immense structural and visual complexity.
 
 * **The Problem:** Patients and clinical teams struggle with post-surgical uncertainty. Existing imaging tools are often static, fragmented, or inaccessible on mobile devices. Patient anxiety regarding soft-tissue drape, scarring, and facial symmetry post-op remains high.
 * **The MaxilloAI Solution:** MaxilloAI is a cross-platform Flutter application powered by a multimodal **Gemini AI** engine. By combining clinical patient profiles, reconstruction parameters, pre-op facial imagery, and 3D diagnostic scans, MaxilloAI generates instant, highly accurate soft-tissue predictions, symmetry risk scoring, personalized recovery milestones, and hospital-ready PDF reports.
@@ -40,7 +40,7 @@ Maxillofacial reconstruction (combining bone grafting, microvascular free flaps,
 ## ✨ Key Features
 
 | Feature | Description |
-| :--- | :--- |
+|---|---|
 | 🧠 **Multimodal Gemini AI Engine** | Integrates pre-op facial photos, CT/MRI scans, and clinical metrics via a deployed Gemini microservice to output soft-tissue confidence scores, asymmetry risk, and anatomical metrics. |
 | ⚡ **5-Step Predictive Flow** | Seamless step-by-step interactive workflow: **Patient Info** ➔ **Reconstruction Specs** ➔ **Image Upload** ➔ **AI Inference** ➔ **Interactive Results**. |
 | 📄 **Hospital-Grade PDF Generator** | Generates exportable, printable PDF medical reports featuring QR verification codes, patient metrics, recovery projections, risk matrices, and physician review blocks. |
@@ -58,7 +58,7 @@ graph TD
     A -->|2. Store Profile & History| C[🗄️ Cloud Firestore]
     A -->|3. Upload Pre-Op Scans & Photos| D[☁️ Firebase Storage]
     
-    A -->|4. Multipart HTTP Request| E[⚡ Gemini AI Backend API<br/>Render.com]
+    A -->|4. Multipart HTTP Request| E[⚡ Gemini AI Backend API / Render.com]
     E -->|5. Multimodal Inference| F[🤖 Gemini AI Model]
     F -->|6. Soft-Tissue Prediction & Risk Analysis| E
     E -->|7. JSON Payload Response| A
@@ -120,18 +120,21 @@ lib/
 ## ⚡ Quickstart Guide
 
 ### Prerequisites
+
 * [Flutter SDK](https://docs.flutter.dev/get-started/install) (`>= 3.24.0`)
 * [Dart SDK](https://dart.dev/get-dart) (`>= 3.3.0`)
 * [Firebase CLI](https://firebase.google.com/docs/cli) & [FlutterFire CLI](https://firebase.flutter.dev/docs/cli/)
 
 ### 1️⃣ Clone & Install Dependencies
+
 ```bash
-git clone https://github.com/your-username/maxilloai.git
-cd maxilloai
+git clone https://github.com/mithunlingala30/maxillo.git
+cd maxillo
 flutter pub get
 ```
 
 ### 2️⃣ Firebase Configuration
+
 1. Create a project in the [Firebase Console](https://console.firebase.google.com).
 2. Enable **Authentication** (Email/Password & Google), **Cloud Firestore**, and **Firebase Storage**.
 3. Link your project with FlutterFire:
@@ -142,6 +145,7 @@ flutter pub get
 4. Update `firestore.rules` and `storage.rules` in your Firebase Console to apply security policies.
 
 ### 3️⃣ AI Backend Connection
+
 The app connects to the Gemini AI prediction microservice configured in `lib/config/app_config.dart`:
 
 ```dart
@@ -151,6 +155,7 @@ static const String predictionApiBaseUrl = 'https://gemini-jy64.onrender.com';
 *(Note: Render free tier instances may take 30-60 seconds to spin up on cold start. The app features built-in 90s timeout handling and status indicators).*
 
 ### 4️⃣ Launch the App
+
 ```bash
 flutter run
 ```
@@ -160,6 +165,7 @@ flutter run
 ## 🗄️ Database Schema
 
 ### `users/{uid}`
+
 ```json
 {
   "fullName": "Dr. Alex Vance",
@@ -176,6 +182,7 @@ flutter run
 ```
 
 ### `users/{uid}/predictions/{predictionId}`
+
 ```json
 {
   "surgeryType": "Mandibular Reconstruction",
@@ -197,8 +204,8 @@ flutter run
 
 ## 🩺 Clinical & Medical Disclaimer
 
-> [!IMPORTANT]
-> **For Informational and Decision-Support Purposes Only.**
+> ⚠️ **IMPORTANT: For Informational and Decision-Support Purposes Only.**
+> 
 > MaxilloAI and its AI-generated predictions, confidence scores, and metrics do not constitute formal medical diagnosis, prognosis, or surgical direction. All outputs must be evaluated by a licensed maxillofacial surgeon or qualified medical professional.
 
 ---
@@ -207,5 +214,4 @@ flutter run
 
 * **Event:** Hackathon 2026
 * **Track:** Healthcare & AI Innovation / Multimodal AI
-* **Created with:** ❤️ by the MaxilloAI Team#   m a x i l l o  
- 
+* **Created with:** ❤️ by the MaxilloAI Team
