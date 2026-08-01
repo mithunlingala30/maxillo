@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:uuid/uuid.dart';
 
 import '../models/app_user.dart';
+import '../models/notification_item.dart';
 import '../services/auth_service.dart';
 import '../services/user_service.dart';
 
@@ -29,6 +31,41 @@ class AppState extends ChangeNotifier {
   AuthStatus status = AuthStatus.unknown;
   AppUser? profile;
   bool hasSeenOnboarding = false;
+
+  // ── In-app notifications ──────────────────────────────────────────────
+  final List<NotificationItem> notifications = [];
+
+  int get unreadCount => notifications.where((n) => !n.isRead).length;
+
+  void addNotification({
+    required NotificationType type,
+    required String title,
+    required String body,
+  }) {
+    notifications.insert(
+      0,
+      NotificationItem(
+        id: const Uuid().v4(),
+        type: type,
+        title: title,
+        body: body,
+        createdAt: DateTime.now(),
+      ),
+    );
+    notifyListeners();
+  }
+
+  void markAllRead() {
+    for (final n in notifications) {
+      n.isRead = true;
+    }
+    notifyListeners();
+  }
+
+  void clearNotifications() {
+    notifications.clear();
+    notifyListeners();
+  }
 
   Future<void> _onAuthChanged(User? user) async {
     await _profileSub?.cancel();

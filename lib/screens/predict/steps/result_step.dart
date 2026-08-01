@@ -1,10 +1,13 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:printing/printing.dart';
+import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../models/app_user.dart';
+import '../../../models/notification_item.dart';
 import '../../../models/prediction_record.dart';
+import '../../../providers/app_state.dart';
 import '../../../services/pdf_service.dart';
 import '../../../theme/app_theme.dart';
 import '../../../widgets/primary_button.dart';
@@ -35,6 +38,14 @@ class _ResultStepState extends State<ResultStep> {
     try {
       final pdfBytes = await PdfService().generateReportBytes(user: widget.user, record: widget.record);
       if (!mounted) return;
+
+      // Fire "Report Generated" in-app notification
+      context.read<AppState>().addNotification(
+        type: NotificationType.reportGenerated,
+        title: 'Report Generated',
+        body: 'Your PDF medical report for ${widget.record.name} has been generated.',
+      );
+
       if (shareOnly) {
         if (kIsWeb) {
           await Printing.sharePdf(bytes: pdfBytes, filename: 'MaxilloAI_Report.pdf');

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../models/notification_item.dart';
 import '../../models/prediction_record.dart';
 import '../../providers/app_state.dart';
 import '../../services/prediction_api_service.dart';
@@ -150,6 +151,15 @@ class _PredictFlowScreenState extends State<PredictFlowScreen> {
       );
 
       await predictionService.savePrediction(record);
+
+      // ── Fire in-app notification ──
+      if (mounted) {
+        context.read<AppState>().addNotification(
+          type: NotificationType.predictionComplete,
+          title: 'Prediction Completed',
+          body: 'Your AI soft tissue prediction for ${record.name} is ready to view.',
+        );
+      }
 
       setState(() {
         _progress = 1;

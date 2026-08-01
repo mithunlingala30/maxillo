@@ -6,6 +6,7 @@ import '../../providers/app_state.dart';
 import '../../services/prediction_service.dart';
 import '../../theme/app_theme.dart';
 import '../../widgets/section_card.dart';
+import '../notifications/notifications_screen.dart';
 import 'insight_detail_screen.dart';
 import 'main_shell.dart';
 
@@ -112,11 +113,47 @@ class HomeScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(color: AppColors.border),
                       ),
-                      child: IconButton(
-                        padding: EdgeInsets.zero,
-                        icon: const Icon(Icons.notifications_none_rounded,
-                            color: AppColors.heading, size: 19),
-                        onPressed: () {},
+                      child: Stack(
+                        clipBehavior: Clip.none,
+                        children: [
+                          IconButton(
+                            padding: EdgeInsets.zero,
+                            icon: const Icon(Icons.notifications_none_rounded,
+                                color: AppColors.heading, size: 19),
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (_) => const NotificationsScreen(),
+                              ));
+                            },
+                          ),
+                          // Unread badge
+                          Consumer<AppState>(
+                            builder: (_, appState, __) {
+                              final count = appState.unreadCount;
+                              if (count == 0) return const SizedBox.shrink();
+                              return Positioned(
+                                top: 4,
+                                right: 4,
+                                child: Container(
+                                  width: 16,
+                                  height: 16,
+                                  decoration: const BoxDecoration(
+                                      color: Color(0xFFEF4444),
+                                      shape: BoxShape.circle),
+                                  child: Center(
+                                    child: Text(
+                                      count > 9 ? '9+' : '$count',
+                                      style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 9,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
                       ),
                     ),
                   ],
