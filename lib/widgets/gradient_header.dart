@@ -45,11 +45,32 @@ class MaxilloLogo extends StatelessWidget {
           width: size,
           height: size,
           decoration: BoxDecoration(
-            gradient: AppColors.primaryButtonGradient,
-            borderRadius: BorderRadius.circular(size * 0.3),
+            borderRadius: BorderRadius.circular(size * 0.28),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.15),
+                blurRadius: 6,
+                offset: const Offset(0, 2),
+              ),
+            ],
           ),
-          child: Icon(Icons.face_retouching_natural,
-              color: Colors.white, size: size * 0.6),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(size * 0.28),
+            child: Image.asset(
+              'assets/images/app_icon.png',
+              width: size,
+              height: size,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) => Container(
+                decoration: BoxDecoration(
+                  gradient: AppColors.primaryButtonGradient,
+                  borderRadius: BorderRadius.circular(size * 0.28),
+                ),
+                child: Icon(Icons.face_retouching_natural,
+                    color: Colors.white, size: size * 0.6),
+              ),
+            ),
+          ),
         ),
         const SizedBox(width: 8),
         Text(
